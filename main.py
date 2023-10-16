@@ -18,8 +18,9 @@ logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 MODULES = {
-    # "Reaction Time": import_module("modules.reaction_time"),
-    "Sequence Memory": import_module("modules.sequence_memory")
+    "Reaction Time": import_module("modules.reaction_time"),
+    "Sequence Memory": import_module("modules.sequence_memory"),
+    "Aim Trainer": import_module("modules.aim_trainer")
 }
 
 # Initialize selenium
@@ -27,6 +28,12 @@ driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install())
 driver.get(config.HOME_PAGE)
 
 logger.info(f"Loaded {len(MODULES)} modules.")
+
+
+def print_results(results: dict):
+    for k, v in results:
+        print(f"{k}: {v}")
+
 
 if __name__ == '__main__':
     game_results = dict()
