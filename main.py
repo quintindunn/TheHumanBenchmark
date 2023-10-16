@@ -1,3 +1,7 @@
+# Author: Quintin Dunn
+# Description: Main file for the project
+# Date: 10/15/23
+
 from importlib import import_module
 
 import sys
@@ -14,6 +18,7 @@ logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 MODULES = {
+    "Reaction Time": import_module("modules.reaction_time")
 }
 
 # Initialize selenium
@@ -21,8 +26,14 @@ driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install())
 driver.get(config.HOME_PAGE)
 
 logger.info(f"Loaded {len(MODULES)} modules.")
+
 if __name__ == '__main__':
+    game_results = dict()
+
     # Run the modules
     for name, module in MODULES.items():
         logger.info(f"Running module {name}")
-        module.run(driver=driver)
+        game_results[name] = module.run(driver=driver)
+
+    # Stop driver from quitting.
+    input()
