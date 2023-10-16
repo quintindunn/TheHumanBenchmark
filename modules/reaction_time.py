@@ -12,6 +12,8 @@ import logging
 
 import config
 
+from ._utils import return_to_homepage
+
 logger = logging.getLogger("reaction_time.py")
 
 
@@ -33,7 +35,7 @@ def start_reaction_time(driver: Chrome) -> None:
     :return: None
     """
 
-    start_btn = driver.find_element(By.XPATH, config.START_REACTION_TIME)
+    start_btn = driver.find_element(By.XPATH, config.START_REACTION_TIME_XPATH)
     start_btn.click()
 
 
@@ -45,7 +47,10 @@ def wait_and_click_btn(driver: Chrome) -> None:
     """
 
     try:
-        click_btn = WebDriverWait(driver=driver, timeout=20, poll_frequency=0.01).until(
+        click_btn = WebDriverWait(driver=driver,
+                                  timeout=config.REACTION_TIME_TIMEOUT_TIME,
+                                  poll_frequency=config.REACTION_TIME_POLLING_FREQUENCY
+                                  ).until(
             ec.presence_of_element_located((By.CLASS_NAME, "view-go"))
         )
     except TimeoutException:
@@ -61,7 +66,7 @@ def get_results(driver: Chrome) -> int:
     :return: None
     """
 
-    results_elem = driver.find_element(By.XPATH, config.REACTION_TIME_RESULTS)
+    results_elem = driver.find_element(By.XPATH, config.REACTION_TIME_RESULTS_XPATH)
     text = results_elem.get_attribute("innerText")
 
     reaction_time = int(text.split(" ms")[0])
@@ -88,5 +93,7 @@ def run(driver: Chrome) -> list[int]:
 
     results = get_results(driver=driver)
     logger.info(f"Reacted in {results}ms.")
+
+    return_to_homepage(driver=driver)
 
     return [results]
