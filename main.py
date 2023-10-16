@@ -18,7 +18,8 @@ logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 MODULES = {
-    "Reaction Time": import_module("modules.reaction_time")
+    # "Reaction Time": import_module("modules.reaction_time"),
+    "Sequence Memory": import_module("modules.sequence_memory")
 }
 
 # Initialize selenium
