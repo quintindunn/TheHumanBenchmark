@@ -1,7 +1,7 @@
 # Author: Quintin Dunn
 # Description: Main file for the project
 # Date: 10/15/23
-
+import time
 from importlib import import_module
 
 import sys
@@ -31,7 +31,7 @@ logger.info(f"Loaded {len(MODULES)} modules.")
 
 
 def print_results(results: dict):
-    for k, v in results:
+    for k, v in results.items():
         print(f"{k}: {v}")
 
 
@@ -42,6 +42,9 @@ if __name__ == '__main__':
     for name, module in MODULES.items():
         logger.info(f"Running module {name}")
         game_results[name] = module.run(driver=driver)
+        time.sleep(1)  # Let game load
+
+    print_results(game_results)
 
     # Stop driver from quitting.
     input()

@@ -1,6 +1,7 @@
 # Author: Quintin Dunn
 # Description: Module for the aim trainer game.
 # Date: 10/15/23
+import time
 
 from selenium.webdriver import Chrome
 from selenium.webdriver.common.by import By

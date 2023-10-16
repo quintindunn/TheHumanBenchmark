@@ -3,7 +3,7 @@ REACTION_TIME_TIMEOUT_TIME = 20  # How long to wait for the button to turn green
 REACTION_TIME_POLLING_FREQUENCY = 0.01  # How often to check if the button turned green (seconds).
 
 # Sequence Memory
-SEQUENCE_MEMORY_TARGET_MEMORY = 50
+SEQUENCE_MEMORY_TARGET_MEMORY = 5  # Time to complete rises quickly, likely resembling: time = ((Tn-1)-(Tn-2))*2+(Tn-1)
 SEQUENCE_MEMORY_POLLING_FREQUENCY = 0.1  # seconds
 SEQUENCE_MEMORY_TIMEOUT = 2  # seconds
 SEQUENCE_MEMORY_BUTTON_DEACTIVATION_TIME = 0.5  # seconds
